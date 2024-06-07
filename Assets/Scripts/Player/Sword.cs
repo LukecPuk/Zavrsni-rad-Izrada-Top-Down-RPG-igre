@@ -7,6 +7,7 @@ public class Sword : MonoBehaviour
 
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
+    [SerializeField] private Transform weaponCollider;
 
     private PlayerControls playerControls;
     private Animator myAnimator;
@@ -44,12 +45,18 @@ public class Sword : MonoBehaviour
     {
         //fire our sword animation
         myAnimator.SetTrigger("Attack");
+        weaponCollider.gameObject.SetActive(true);
 
         slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
         slashAnim.transform.parent = this.transform.parent;
     }
 
-    public void SwingUpFlipAnim()
+    public void DoneAttackingAnimEvent()
+    {
+        weaponCollider.gameObject.SetActive(false);
+    }
+
+    public void SwingUpFlipAnimEvent()
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
 
@@ -59,7 +66,7 @@ public class Sword : MonoBehaviour
         }
     }
     
-    public void SwingDownFlipAnim()
+    public void SwingDownFlipAnimEvent()
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -76,17 +83,18 @@ public class Sword : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(playerController.transform.position);
-        float deltaX = mousePos.x - playerScreenPoint.x;
-        float deltaY = mousePos.y - playerScreenPoint.y;
-        float angle = Mathf.Atan2(deltaY, Mathf.Abs(deltaX)) * Mathf.Rad2Deg;
 
-        if (deltaX < 0)
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
+        if (mousePos.x < playerScreenPoint.x)
         {
-            activeWeapon.transform.rotation = Quaternion.Euler(0, 180, angle);
+            activeWeapon.transform.rotation = Quaternion.Euler(0, 180, 0);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else
         {
-            activeWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+            activeWeapon.transform.rotation = Quaternion.Euler(0, 0, 0);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

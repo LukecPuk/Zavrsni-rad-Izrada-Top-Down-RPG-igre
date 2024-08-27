@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2070485072802132570}
   - component: {fileID: 744177459239720620}
   - component: {fileID: 1676093321556545949}
+  - component: {fileID: -500644498683309678}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -170,6 +171,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamChangeDirFloat: 2
+  attackRange: 0
+  attackCooldown: 2
+  stopMovingWhileAttacking: 0
+  enemyType: {fileID: 0}
 --- !u!114 &6355073923133605003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +275,21 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &-500644498683309678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887177676377691103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d154179a7a69a46ab6f70a511e2a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 7604534905268907451, guid: 2fc0c8a8a8d2af245a576ef30e2cba47, type: 3}
+  healthGlobe: {fileID: 7604534905268907451, guid: b360803d445e2bb47add694086a80911, type: 3}
+  staminaGlobe: {fileID: 7604534905268907451, guid: 1608e6e696801f240a733ff57b3d7322, type: 3}
 --- !u!1 &2071499276458340510
 GameObject:
   m_ObjectHideFlags: 0

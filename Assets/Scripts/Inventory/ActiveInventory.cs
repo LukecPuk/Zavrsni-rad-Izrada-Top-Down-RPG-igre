@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem; // Make sure to include this namespace
 
-public class ActiveInventory : MonoBehaviour
+public class ActiveInventory : Singleton<ActiveInventory>
 {
     private int activeSlotIndexNum = 0;
 
     private PlayerControls playerControls;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerControls = new PlayerControls();
     }
 
     private void Start()
     {
         playerControls.Inventory.Keyboard.performed += ctx => ToggleActiveSlot(ctx.control.name);
-
-        ToggleActiveHighlight(0);
     }
 
     private void OnEnable()
@@ -26,9 +25,9 @@ public class ActiveInventory : MonoBehaviour
         playerControls.Enable();
     }
 
-    private void OnDisable()
+    public void EquipStartingWeapon()
     {
-        playerControls.Disable();
+        ToggleActiveHighlight(0);
     }
 
     private void ToggleActiveSlot(string keyName)
@@ -66,6 +65,8 @@ public class ActiveInventory : MonoBehaviour
 
     private void ChangeActiveWeapon()
     {
+        if(PlayerHealth.Instance.IsDead) { return; }
+
         if(ActiveWeapon.Instance.CurrentActiveWeapon != null)
         {
             Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
@@ -74,7 +75,6 @@ public class ActiveInventory : MonoBehaviour
         Transform childTransform = transform.GetChild(activeSlotIndexNum);
         InventorySlot inventorySlot = childTransform.GetComponentInChildren<InventorySlot>();
         WeaponInfo weaponInfo = inventorySlot.GetWeaponInfo();
-        
 
         if(weaponInfo == null)
         {

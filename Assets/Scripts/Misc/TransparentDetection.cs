@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class TransparentDetection : MonoBehaviour
 {
     [Range(0, 1)]
-    [SerializeField] private float transparencyAmount = 0.8f;
+    [SerializeField] private float transparencyAmount = 0.5f;
     [SerializeField] private float fadeTime = .4f;
 
     private SpriteRenderer spriteRenderer;
@@ -21,9 +21,9 @@ public class TransparentDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerController>())
         {
-            if(spriteRenderer)
+            if (spriteRenderer)
             {
                 StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, transparencyAmount));
             }
@@ -38,13 +38,16 @@ public class TransparentDetection : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerController>())
         {
-            if (spriteRenderer)
+            if (gameObject.activeInHierarchy)
             {
-                StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, 1f));
-            }
-            else if (tilemap)
-            {
-                StartCoroutine(FadeRoutine(tilemap, fadeTime, tilemap.color.a, 1f));
+                if (spriteRenderer)
+                {
+                    StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, 1f));
+                }
+                else if (tilemap)
+                {
+                    StartCoroutine(FadeRoutine(tilemap, fadeTime, tilemap.color.a, 1f));
+                }
             }
         }
     }
@@ -52,7 +55,7 @@ public class TransparentDetection : MonoBehaviour
     private IEnumerator FadeRoutine(SpriteRenderer spriteRenderer, float fadeTime, float startValue, float targetTransparency)
     {
         float elapsedTime = 0;
-        while(elapsedTime < fadeTime)
+        while (elapsedTime < fadeTime)
         {
             elapsedTime += Time.deltaTime;
             float newAlpha = Mathf.Lerp(startValue, targetTransparency, elapsedTime / fadeTime);

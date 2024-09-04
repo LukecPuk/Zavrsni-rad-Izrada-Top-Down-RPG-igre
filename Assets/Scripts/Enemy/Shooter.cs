@@ -25,7 +25,7 @@ public class Shooter : MonoBehaviour, IEnemy
 
     private void OnValidate()
     {
-        if(oscillate) { stagger = true; } 
+        //if(oscillate) { stagger = true; } 
         if(!oscillate) { stagger = false; }
         if(projectilesPerBurst < 1) { projectilesPerBurst = 1; }
         if(burstCount < 1) { burstCount = 1; }

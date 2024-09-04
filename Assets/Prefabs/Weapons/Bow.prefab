@@ -81,6 +81,7 @@ MonoBehaviour:
   weaponInfo: {fileID: 11400000, guid: 4f0f2a7efe7fd8640b796e98d4201023, type: 2}
   arrowPrefab: {fileID: 4890561727962065044, guid: 33d7e25fbf5b43d448818922bc4b8283, type: 3}
   arrowSpawnPoint: {fileID: 4364844546222242708}
+  damageSoundClip: {fileID: 8300000, guid: 7b9041b8809c77d4eb48989adab79ecf, type: 3}
 --- !u!212 &8714545156230328313
 SpriteRenderer:
   m_ObjectHideFlags: 0

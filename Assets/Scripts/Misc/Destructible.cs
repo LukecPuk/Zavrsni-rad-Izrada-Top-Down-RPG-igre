@@ -5,6 +5,8 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
     [SerializeField] private GameObject destroyVFX;
+    [SerializeField] private AudioClip SoundClip;
+    [SerializeField] private float SoundVolume = 0.25f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,6 +15,7 @@ public class Destructible : MonoBehaviour
             PickUpSpawner pickUpSpawner = GetComponent<PickUpSpawner>();
             pickUpSpawner?.DropItems();
             Instantiate(destroyVFX, transform.position, Quaternion.identity);
+            SFXManager.instance.PlaySFXClip(SoundClip, transform, SoundVolume);
             Destroy(gameObject);
         }
     }

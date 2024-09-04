@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyVFX: {fileID: 346892579206424220, guid: 877efbe82d1a58344abbca36015deb50, type: 3}
+  SoundClip: {fileID: 8300000, guid: 3e01e0b40d8b3724f92aabc5772348b9, type: 3}
+  SoundVolume: 0.25
 --- !u!114 &-8716076542763814496
 MonoBehaviour:
   m_ObjectHideFlags: 0

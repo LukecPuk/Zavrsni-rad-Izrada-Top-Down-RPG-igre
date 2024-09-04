@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private bool stopMovingWhileAttacking = false;
     [SerializeField] private MonoBehaviour enemyType;
+
+    // New serialized fields
+    [SerializeField] private bool PlayerFollow = false;
+    [SerializeField] private float PlayerDistance = 5f;
 
     private bool canAttack = true;
 
@@ -42,17 +46,17 @@ public class EnemyAI : MonoBehaviour
 
     private void MovementStateControl()
     {
-        switch(state)
+        switch (state)
         {
             default:
-                // default
+            // default
             case State.Roaming:
                 Roaming();
-            break;
+                break;
 
             case State.Attacking:
                 Attacking();
-            break;
+                break;
         }
     }
 
@@ -60,16 +64,24 @@ public class EnemyAI : MonoBehaviour
     {
         timeRoaming += Time.deltaTime;
 
-        enemyPathfinding.MoveTo(roamPosition);
-
-        if(Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+        // Check if the enemy should follow the player
+        if (PlayerFollow && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < PlayerDistance)
         {
-            state = State.Attacking;
+            enemyPathfinding.FollowPlayer(PlayerController.Instance.transform.position);
         }
-
-        if(timeRoaming > roamChangeDirFloat)
+        else
         {
-            roamPosition = GetRoamingPosition();
+            enemyPathfinding.MoveTo(roamPosition);
+
+            if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+            {
+                state = State.Attacking;
+            }
+
+            if (timeRoaming > roamChangeDirFloat)
+            {
+                roamPosition = GetRoamingPosition();
+            }
         }
     }
 
@@ -85,10 +97,10 @@ public class EnemyAI : MonoBehaviour
             canAttack = false;
             (enemyType as IEnemy).Attack();
 
-            if(stopMovingWhileAttacking)
+            if (stopMovingWhileAttacking)
             {
                 enemyPathfinding.StopMoving();
-            } 
+            }
             else
             {
                 enemyPathfinding.MoveTo(roamPosition);

@@ -18,6 +18,8 @@ public class Pickup : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
     [SerializeField] private float heightY = 1.5f;
     [SerializeField] private float popDuration = 1f;
+    [SerializeField] private AudioClip SoundClip;
+    [SerializeField] private float SoundVolume = 0.25f;
 
     private Vector3 moveDir;
     private Rigidbody2D rb;
@@ -58,6 +60,7 @@ public class Pickup : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>())
         {
             DetectPickupType();
+            SFXManager.instance.PlaySFXClip(SoundClip, transform, SoundVolume);
             Destroy(gameObject);
         }
     }

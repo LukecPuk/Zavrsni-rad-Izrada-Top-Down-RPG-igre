@@ -8,6 +8,8 @@ public class Sword : MonoBehaviour, IWeapon
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
     [SerializeField] private WeaponInfo weaponInfo;
+    [SerializeField] private AudioClip damageSoundClip;
+    [SerializeField] private float SoundVolume = 0.25f;
 
     private Transform weaponCollider;
     private Animator myAnimator;
@@ -42,6 +44,7 @@ public class Sword : MonoBehaviour, IWeapon
 
     public void Attack()
     {
+        SFXManager.instance.PlaySFXClip(damageSoundClip, transform, SoundVolume);
         myAnimator.SetTrigger("Attack");
         weaponCollider.gameObject.SetActive(true);
 

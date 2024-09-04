@@ -9,6 +9,7 @@ public class EconomyManager : Singleton<EconomyManager>
     private int currentGold = 0;
 
     const string COIN_AMOUNT_TEXT = "Gold Amount Text";
+    private const int scoreMultiplier = 50;
 
     public void UpdateCurrentGold()
     {
@@ -20,5 +21,16 @@ public class EconomyManager : Singleton<EconomyManager>
         }
 
         goldText.text = currentGold.ToString("D3");
+    }
+
+    public void ResetCurrentGold()
+    {
+        currentGold = 0;
+        goldText.text = currentGold.ToString("D3");
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentGold * scoreMultiplier;
     }
 }

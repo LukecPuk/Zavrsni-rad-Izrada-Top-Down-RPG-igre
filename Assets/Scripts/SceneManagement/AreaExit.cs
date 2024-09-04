@@ -14,9 +14,17 @@ public class AreaExit : MonoBehaviour
     {
         if(other.gameObject.GetComponent<PlayerController>())
         {
-            SceneManagement.Instance.SetTransitionName(sceneTransitionName);
-            UIFade.Instance.FadeToBlack();
-            StartCoroutine(LoadSceneRoutine());
+            if(sceneToLoad == "Game Over")
+            {
+                SceneManagement.Instance.SetTransitionName(sceneTransitionName);
+                StartCoroutine(LoadSceneRoutine());
+            }
+            else
+            {
+                SceneManagement.Instance.SetTransitionName(sceneTransitionName);
+                UIFade.Instance.FadeToBlack();
+                StartCoroutine(LoadSceneRoutine());
+            }
         }
     }
 
@@ -28,6 +36,10 @@ public class AreaExit : MonoBehaviour
             yield return null;
         }
         //yield return new WaitForSeconds(waitToLoadTime);
+        if(sceneToLoad == "Game Over")
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
         SceneManager.LoadScene(sceneToLoad);
     }
 }

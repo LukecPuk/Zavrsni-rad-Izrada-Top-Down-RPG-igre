@@ -5,6 +5,8 @@ using UnityEngine;
 public class MagicLaser : MonoBehaviour
 {
     [SerializeField] private float laserGrowTime = 2f;
+    [SerializeField] private AudioClip damageSoundClip;
+    [SerializeField] private float SoundVolume = 0.25f;
 
     private bool isGrowing = true;
     private float laserRange;
@@ -32,6 +34,7 @@ public class MagicLaser : MonoBehaviour
 
     public void UpdateLaserRange(float laserRange)
     {
+        SFXManager.instance.PlaySFXClip(damageSoundClip, transform, SoundVolume);
         this.laserRange = laserRange;
         StartCoroutine(IncreaseLaserLengthRoutine());
     }

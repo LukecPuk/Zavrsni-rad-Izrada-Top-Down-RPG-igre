@@ -191,3 +191,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   heightY: 1.5
   popDuration: 0.5
+  SoundClip: {fileID: 8300000, guid: 45c80b2fb805b164a90a90eb55fd37ee, type: 3}

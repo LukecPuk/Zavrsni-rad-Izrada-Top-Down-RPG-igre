@@ -174,7 +174,9 @@ MonoBehaviour:
   attackRange: 0
   attackCooldown: 2
   stopMovingWhileAttacking: 0
-  enemyType: {fileID: 0}
+  enemyType: {fileID: 5644688393286878063}
+  PlayerFollow: 1
+  PlayerDistance: 5
 --- !u!114 &6355073923133605003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +205,8 @@ MonoBehaviour:
   startingHealth: 3
   deathVFXPrefab: {fileID: 8123353307473481927, guid: 013eb57fbd058aa4bbf1f625535b82b3, type: 3}
   knockBackThrust: 15
+  SoundClip: {fileID: 8300000, guid: d377037c9be19f14ab287649a5b1a2c1, type: 3}
+  SoundVolume: 0.25
 --- !u!114 &2196950239069599520
 MonoBehaviour:
   m_ObjectHideFlags: 0

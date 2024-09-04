@@ -39,6 +39,12 @@ public class EnemyPathfinding : MonoBehaviour
         moveDir = targetPosition;
     }
 
+    public void FollowPlayer(Vector2 playerPosition)
+    {
+        // New method specifically for following the player
+        moveDir = (playerPosition - rb.position).normalized;
+    }
+
     public void StopMoving()
     {
         moveDir = Vector3.zero;

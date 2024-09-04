@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserGrowTime: 0.5
+  damageSoundClip: {fileID: 8300000, guid: c44476c6c6c809c43bc9aabc915674ef, type: 3}
 --- !u!114 &2041101693919584871
 MonoBehaviour:
   m_ObjectHideFlags: 0

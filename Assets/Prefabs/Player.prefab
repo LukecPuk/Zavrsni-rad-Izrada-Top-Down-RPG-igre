@@ -469,6 +469,10 @@ MonoBehaviour:
   maxHealth: 3
   knockBackThrustAmount: 10
   damageRecoveryTime: 1
+  HitSoundClip: {fileID: 8300000, guid: 6de47e2077bb3414199c67707b40a5f7, type: 3}
+  DeathSoundClip: {fileID: 8300000, guid: 50ccd48696405f141b82268bf6d29681, type: 3}
+  HitSoundVolume: 0.25
+  DeathSoundVolume: 0.25
 --- !u!114 &4291817469391929432
 MonoBehaviour:
   m_ObjectHideFlags: 0

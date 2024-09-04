@@ -11,6 +11,10 @@ public class PlayerHealth : Singleton<PlayerHealth>
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
+    [SerializeField] private AudioClip HitSoundClip;
+    [SerializeField] private AudioClip DeathSoundClip;
+    [SerializeField] private float HitSoundVolume = 0.25f;
+    [SerializeField] private float DeathSoundVolume = 0.25f;
 
     private SpriteRenderer spriteRenderer;
     private int currentHealth;
@@ -63,9 +67,11 @@ public class PlayerHealth : Singleton<PlayerHealth>
     {
         if (!canTakeDamage) { return; }
 
+
         ScreenShakeManager.Instance.ShakeScreen();
         knockback.GetKnockedBack(hitTransform, knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
+        SFXManager.instance.PlaySFXClip(HitSoundClip, transform, HitSoundVolume);
 
         canTakeDamage = false;
         currentHealth -= damageAmount;
@@ -89,12 +95,14 @@ public class PlayerHealth : Singleton<PlayerHealth>
     private IEnumerator DeathLoadSceneRoutine()
     {
         spriteRenderer.color = Color.red;
+        SFXManager.instance.PlaySFXClip(DeathSoundClip, transform, DeathSoundVolume);
         yield return new WaitForSeconds(3f);
 
         SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the scene loaded event
 
         Destroy(gameObject);
         Stamina.Instance.ReplenishStaminaOnDeath();
+        EconomyManager.Instance.ResetCurrentGold();
         //spriteRenderer.color = Color.white;
         SceneManager.LoadScene(TOWN_TEXT);
     }

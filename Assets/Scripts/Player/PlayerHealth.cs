@@ -100,12 +100,16 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
         SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the scene loaded event
 
-        Destroy(gameObject);
         Stamina.Instance.ReplenishStaminaOnDeath();
         EconomyManager.Instance.ResetCurrentGold();
-        //spriteRenderer.color = Color.white;
+
+        // Load the scene first before destroying the object to avoid reference issues
         SceneManager.LoadScene(TOWN_TEXT);
+
+        // Destroy the player object after the scene starts loading
+        Destroy(gameObject);
     }
+
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

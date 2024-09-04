@@ -64,51 +64,68 @@ public class EnemyAI : MonoBehaviour
     {
         timeRoaming += Time.deltaTime;
 
-        // Check if the enemy should follow the player
-        if (PlayerFollow && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < PlayerDistance)
+        // Check if PlayerController.Instance is not null
+        if (PlayerController.Instance != null)
         {
-            enemyPathfinding.FollowPlayer(PlayerController.Instance.transform.position);
+            // Check if the enemy should follow the player
+            if (PlayerFollow && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < PlayerDistance)
+            {
+                enemyPathfinding.FollowPlayer(PlayerController.Instance.transform.position);
+            }
+            else
+            {
+                enemyPathfinding.MoveTo(roamPosition);
+
+                if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+                {
+                    state = State.Attacking;
+                }
+
+                if (timeRoaming > roamChangeDirFloat)
+                {
+                    roamPosition = GetRoamingPosition();
+                }
+            }
         }
         else
         {
+            // Fallback logic if the player is not present
             enemyPathfinding.MoveTo(roamPosition);
-
-            if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
-            {
-                state = State.Attacking;
-            }
-
-            if (timeRoaming > roamChangeDirFloat)
-            {
-                roamPosition = GetRoamingPosition();
-            }
         }
     }
 
     private void Attacking()
     {
-        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+        if (PlayerController.Instance != null)
+        {
+            if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+            {
+                state = State.Roaming;
+            }
+
+            if (attackRange != 0 && canAttack)
+            {
+                canAttack = false;
+                (enemyType as IEnemy).Attack();
+
+                if (stopMovingWhileAttacking)
+                {
+                    enemyPathfinding.StopMoving();
+                }
+                else
+                {
+                    enemyPathfinding.MoveTo(roamPosition);
+                }
+
+                StartCoroutine(AttackCooldownRoutine());
+            }
+        }
+        else
         {
             state = State.Roaming;
         }
-
-        if (attackRange != 0 && canAttack)
-        {
-            canAttack = false;
-            (enemyType as IEnemy).Attack();
-
-            if (stopMovingWhileAttacking)
-            {
-                enemyPathfinding.StopMoving();
-            }
-            else
-            {
-                enemyPathfinding.MoveTo(roamPosition);
-            }
-
-            StartCoroutine(AttackCooldownRoutine());
-        }
     }
+
 
     private IEnumerator AttackCooldownRoutine()
     {

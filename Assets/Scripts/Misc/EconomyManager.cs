@@ -26,8 +26,16 @@ public class EconomyManager : Singleton<EconomyManager>
     public void ResetCurrentGold()
     {
         currentGold = 0;
-        goldText.text = currentGold.ToString("D3");
+        if (goldText == null)
+        {
+            goldText = GameObject.Find(COIN_AMOUNT_TEXT).GetComponent<TMP_Text>();
+        }
+        if (goldText != null)
+        {
+            goldText.text = currentGold.ToString("D3");
+        }
     }
+
 
     public int GetCurrentScore()
     {

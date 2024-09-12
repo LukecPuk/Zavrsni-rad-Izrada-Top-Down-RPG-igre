@@ -206,6 +206,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &27711955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27711956}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &27711956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27711955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 91.867775, y: 301.49707, z: -5.5953636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &62913469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242,6 +273,10 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Scene_5
       objectReference: {fileID: 0}
+    - target: {fileID: 5618935403062855639, guid: 0ae8cf1517c94294999304a255232261, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 27711956}
     - target: {fileID: 5618935403062855639, guid: 0ae8cf1517c94294999304a255232261, type: 3}
       propertyPath: sceneTransitionName
       value: North_Entrance
@@ -1172,6 +1207,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fc0414b67698c43a588ba9bbda4d7d, type: 3}
+--- !u!1 &404544417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5168676271572396910, guid: d3fc0414b67698c43a588ba9bbda4d7d, type: 3}
+  m_PrefabInstance: {fileID: 404544416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417060303
 GameObject:
   m_ObjectHideFlags: 0
@@ -30321,6 +30361,10 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Scene_3
       objectReference: {fileID: 0}
+    - target: {fileID: 5618935403062855639, guid: 0ae8cf1517c94294999304a255232261, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 27711956}
     - target: {fileID: 8605575939030804650, guid: 0ae8cf1517c94294999304a255232261, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.31
@@ -31351,6 +31395,10 @@ PrefabInstance:
       propertyPath: scene5Music
       value: 
       objectReference: {fileID: 8300000, guid: 037b7a6b36d508c4eb524c058a091eb8, type: 3}
+    - target: {fileID: 7896168048211070655, guid: 3cbdae626b96f2b4ab96d6b0f79283d4, type: 3}
+      propertyPath: defeatEnemiesText
+      value: 
+      objectReference: {fileID: 404544417}
     - target: {fileID: 8069502520779296455, guid: 3cbdae626b96f2b4ab96d6b0f79283d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.622559
@@ -44160,6 +44208,7 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 2093557814}
   - {fileID: 1264767968}
+  - {fileID: 27711956}
   - {fileID: 1728389298}
   - {fileID: 819089839}
   - {fileID: 1416752033}

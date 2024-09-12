@@ -386,6 +386,8 @@ MonoBehaviour:
   myTrailRenderer: {fileID: 2953565159604078183}
   weaponCollider: {fileID: 6839991165931616128}
   slashAnimSpawnPoint: {fileID: 4948793478650036851}
+  dashSoundClip: {fileID: 8300000, guid: 7c78c706051021c42b75f9cc32e831db, type: 3}
+  SoundVolume: 0.25
 --- !u!95 &6680706785881515998
 Animator:
   serializedVersion: 5

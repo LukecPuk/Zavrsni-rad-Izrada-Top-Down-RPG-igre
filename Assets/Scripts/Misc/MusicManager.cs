@@ -30,13 +30,13 @@ public class MusicManager : MonoBehaviour
         {
             ChangeMusic(bossMusic);
         }
-        else if (scene.name == "Game Over") // Change to your exact Game Over scene name
+        else if (scene.name == "Game Over")
         {
             ChangeMusic(gameOverMusic);
         }
         else
         {
-            ChangeMusic(bgmMusic); // Change back to default music for other scenes
+            ChangeMusic(bgmMusic);
         }
     }
 

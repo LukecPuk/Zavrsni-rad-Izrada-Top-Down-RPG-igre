@@ -23,7 +23,8 @@ public class Bow : MonoBehaviour, IWeapon
     {
         myAnimator.SetTrigger(FIRE_HASH);
         SFXManager.instance.PlaySFXClip(damageSoundClip, transform, SoundVolume);
-        GameObject newArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, ActiveWeapon.Instance.transform.rotation);
+        GameObject newArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position,
+            ActiveWeapon.Instance.transform.rotation);
         newArrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);
     }
 

@@ -30056,6 +30056,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Scene_3
       objectReference: {fileID: 0}
+    - target: {fileID: 904608089304646319, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 2008622686}
+    - target: {fileID: 904608089304646319, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
+      propertyPath: defeatEnemiesText
+      value: 
+      objectReference: {fileID: 3146114854022493648}
     - target: {fileID: 4724286520496181822, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32
@@ -40279,6 +40287,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7896168048211070655, guid: 3cbdae626b96f2b4ab96d6b0f79283d4, type: 3}
+      propertyPath: defeatEnemiesText
+      value: 
+      objectReference: {fileID: 3146114854022493648}
     - target: {fileID: 8069502520779296455, guid: 3cbdae626b96f2b4ab96d6b0f79283d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.63255787
@@ -40814,6 +40826,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fc0414b67698c43a588ba9bbda4d7d, type: 3}
+--- !u!1 &3146114854022493648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5168676271572396910, guid: d3fc0414b67698c43a588ba9bbda4d7d, type: 3}
+  m_PrefabInstance: {fileID: 3146114854022493647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4325378599107826811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41006,6 +41023,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 904608089304646319, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 2008622686}
+    - target: {fileID: 904608089304646319, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
+      propertyPath: defeatEnemiesText
+      value: 
+      objectReference: {fileID: 3146114854022493648}
     - target: {fileID: 5444044096360763170, guid: 335cb4f8096a3a842b1e218f106ef0bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.09

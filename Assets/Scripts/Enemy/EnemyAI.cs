@@ -64,11 +64,10 @@ public class EnemyAI : MonoBehaviour
     {
         timeRoaming += Time.deltaTime;
 
-        // Check if PlayerController.Instance is not null
         if (PlayerController.Instance != null)
         {
-            // Check if the enemy should follow the player
-            if (PlayerFollow && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < PlayerDistance)
+            if (PlayerFollow && Vector2.Distance(transform.position, 
+                PlayerController.Instance.transform.position) < PlayerDistance)
             {
                 enemyPathfinding.FollowPlayer(PlayerController.Instance.transform.position);
             }
@@ -76,7 +75,8 @@ public class EnemyAI : MonoBehaviour
             {
                 enemyPathfinding.MoveTo(roamPosition);
 
-                if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+                if (Vector2.Distance(transform.position, 
+                    PlayerController.Instance.transform.position) < attackRange)
                 {
                     state = State.Attacking;
                 }
@@ -89,7 +89,6 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            // Fallback logic if the player is not present
             enemyPathfinding.MoveTo(roamPosition);
         }
     }
@@ -98,7 +97,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (PlayerController.Instance != null)
         {
-            if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+            if (Vector2.Distance(transform.position, 
+                PlayerController.Instance.transform.position) > attackRange)
             {
                 state = State.Roaming;
             }

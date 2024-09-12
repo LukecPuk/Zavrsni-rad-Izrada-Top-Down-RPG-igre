@@ -175,6 +175,8 @@ MonoBehaviour:
   attackCooldown: 2
   stopMovingWhileAttacking: 1
   enemyType: {fileID: 6308328538708832515}
+  attackSoundClip: {fileID: 8300000, guid: 18dab686399e7374ba19fb21f6fc25ad, type: 3}
+  SoundVolume: 0.25
   PlayerFollow: 0
   PlayerDistance: 5
 --- !u!114 &8978242827814807608

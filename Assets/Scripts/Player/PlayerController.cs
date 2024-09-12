@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +14,8 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private TrailRenderer myTrailRenderer;
     [SerializeField] private Transform weaponCollider;
     [SerializeField] private Transform slashAnimSpawnPoint;
+    [SerializeField] private AudioClip dashSoundClip;
+    [SerializeField] private float SoundVolume = 0.25f;
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -39,7 +41,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
-        playerControls.Combat.Dash.performed += _ => Dash();
+        playerControls.Combat.Dash.performed += _ => Dash(); // Dodjeljuje akciju Dash-a na odgovarajući input
 
         startingMoveSpeed = moveSpeed;
 
@@ -58,7 +60,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Update()
     {
-        PlayerInput();
+        PlayerInput(); // Praćenje inputa za kretanje i animacije
     }
 
     private void FixedUpdate()
@@ -79,27 +81,30 @@ public class PlayerController : Singleton<PlayerController>
 
     private void PlayerInput()
     {
-        movement = playerControls.Movement.Move.ReadValue<Vector2>();
+        movement = playerControls.Movement.Move.ReadValue<Vector2>(); // Čita smjer kretanja
 
+        //Ažurira animator parametre za kretanje
         myAnimator.SetFloat("moveX", movement.x);
         myAnimator.SetFloat("moveY", movement.y);
     }
 
     private void Move()
     {
-        if(knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) { return; }
+        // Ako je igrač u stanju Knockback-a ili je mrtav, ne može se kretati
+        if (knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) { return; }
 
+        // Pomicanje igrača
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
     private void AdjustPlayerFacingDirection()
     {
         Vector3 mousePos = Input.mousePosition;
-        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        // Dobiva položaj igrača na ekranu
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position); 
 
         if(mousePos.x < playerScreenPoint.x)
         {
-            // flip player sprite;
             mySpriteRenderer.flipX = true;
             facingLeft = true;
         }
@@ -112,13 +117,16 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Dash()
     {
+        // Provjera da li je igrač već u dash-u i ima li dosta dash-a za potrošiti
         if(!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
-            Stamina.Instance.UseStamina();
-            isDashing = true;
-            moveSpeed *= dashSpeed;
-            myTrailRenderer.emitting = true;
-            StartCoroutine(EndDashRoutine());
+            Stamina.Instance.UseStamina(); // Potroši jedan dash
+            isDashing = true; // Stavlja igrača u stanje dash-a
+            moveSpeed *= dashSpeed; // Naglo povećava brzinu kretanja
+            myTrailRenderer.emitting = true; // Aktivira vizualni efekt dash-a
+            // Reproducira zvuk dash-a
+            SFXManager.instance.PlaySFXClip(dashSoundClip, transform, SoundVolume);
+            StartCoroutine(EndDashRoutine()); // Pokreće korutinu završetka dash-a
         }
     }
 
